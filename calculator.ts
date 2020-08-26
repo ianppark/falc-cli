@@ -1,7 +1,7 @@
 import { Item } from "./types.ts";
 
 export const Calculator = (function () {
-  const assemblers = (
+  const itemAssemblers = (
     craftingSpeed: number,
     goalPerMinute: number,
     item: Item,
@@ -12,7 +12,20 @@ export const Calculator = (function () {
     return Math.ceil(goalPerSecond / quantityPerSecond);
   };
 
+  const assemblers = (
+    craftingSpeed: number,
+    goalPerMinute: number,
+    quantityCrafted: number,
+    craftingTime: number,
+  ) => {
+    const goalPerSecond: number = goalPerMinute / 60;
+    const quantityPerSecond: number = (quantityCrafted / craftingTime) *
+      craftingSpeed;
+    return Math.ceil(goalPerSecond / quantityPerSecond);
+  };
+
   return {
+    itemAssemblers,
     assemblers,
   };
 })();

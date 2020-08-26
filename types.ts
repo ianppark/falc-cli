@@ -5,6 +5,7 @@ export enum asmLevel {
 }
 
 export enum Prod {
+  PLAYER = 0,
   MINER,
   SMELTER,
   ASSEMBLER,
@@ -17,7 +18,12 @@ export interface Item {
   producedBy: Prod;
   quantityCrafted: number;
   craftingTime: number;
-  requires: object[];
+  requires: Requirement[];
+}
+
+export interface Requirement {
+  name: string;
+  quantity: number;
 }
 
 export const items: Item[] = [
@@ -68,6 +74,69 @@ export const items: Item[] = [
     craftingTime: 0.5,
     requires: [
       { name: "iron-plate", quantity: 2 },
+    ],
+  },
+  {
+    name: "copper-ore",
+    producedBy: Prod.MINER,
+    quantityCrafted: 1,
+    craftingTime: 1,
+    requires: [],
+  },
+  {
+    name: "inserter",
+    producedBy: Prod.ASSEMBLER,
+    quantityCrafted: 2,
+    craftingTime: 0.5,
+    requires: [
+      { name: "iron-plate", quantity: 1 },
+      { name: "iron-gear-wheel", quantity: 1 },
+      { name: "electronic-circuit", quantity: 1 },
+    ],
+  },
+  {
+    name: "electronic-circuit",
+    producedBy: Prod.ASSEMBLER,
+    quantityCrafted: 1,
+    craftingTime: 0.5,
+    requires: [
+      { name: "copper-cable", quantity: 3 },
+      { name: "iron-plate", quantity: 1 },
+    ],
+  },
+  {
+    name: "copper-cable",
+    producedBy: Prod.ASSEMBLER,
+    quantityCrafted: 2,
+    craftingTime: 0.5,
+    requires: [
+      { name: "copper-plate", quantity: 1 },
+    ],
+  },
+  {
+    name: "iron-plate",
+    producedBy: Prod.SMELTER,
+    quantityCrafted: 1,
+    craftingTime: 3.2,
+    requires: [
+      { name: "iron-ore", quantity: 1 },
+    ],
+  },
+  {
+    name: "iron-ore",
+    producedBy: Prod.MINER,
+    quantityCrafted: 1,
+    craftingTime: 1,
+    requires: [],
+  },
+  {
+    name: "transport-belt",
+    producedBy: Prod.ASSEMBLER,
+    quantityCrafted: 2,
+    craftingTime: 0.5,
+    requires: [
+      { name: "iron-gear-wheel", quantity: 1 },
+      { name: "iron-plate", quantity: 1 },
     ],
   },
 ];
